@@ -17,7 +17,6 @@ public class FileMetadata implements java.io.Serializable {
 	private String name;
 	private String location;
 	private String format;
-	private String sizeKb;
 	private String sizeByte;
 	private String permissions;
 	private String owner;
@@ -76,15 +75,6 @@ public class FileMetadata implements java.io.Serializable {
 
 	public void setFormat(String format) {
 		this.format = format;
-	}
-
-	@Column(name = "sizeKb", nullable = true, length = 100)
-	public String getSizeKb() {
-		return sizeKb;
-	}
-
-	public void setSizeKb(String sizeKb) {
-		this.sizeKb = sizeKb;
 	}
 
 	@Column(name = "sizeByte", nullable = true, length = 100)
@@ -198,7 +188,6 @@ public class FileMetadata implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "FileMetadata [id=" + id + ", source=" + source + ", name=" + name + ", location=" + location
-				+ ", format=" + format + ", sizeKb=" + sizeKb + ", sizeByte=" + sizeByte + ", permissions="
 				+ permissions + ", owner=" + owner + ", group=" + group + ", numOfRecords=" + numOfRecords
 				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", loadStatus=" + loadStatus
 				+ ", errorMessage=" + errorMessage + ", recordCreatedBy=" + recordCreatedBy + ", timeStamp=" + timeStamp
