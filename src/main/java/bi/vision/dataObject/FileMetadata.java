@@ -26,7 +26,6 @@ public class FileMetadata implements java.io.Serializable {
 	private String updateDate;
 	private String loadStatus;
 	private String errorMessage;
-	private String recordCreatedBy;
 	private String timeStamp;
 	private String compressed;
 
@@ -158,15 +157,6 @@ public class FileMetadata implements java.io.Serializable {
 		this.errorMessage = errorMessage;
 	}
 
-	@Column(name = "recordCreatedBy", nullable = true, length = 100)
-	public String getRecordCreatedBy() {
-		return recordCreatedBy;
-	}
-
-	public void setRecordCreatedBy(String recordCreatedBy) {
-		this.recordCreatedBy = recordCreatedBy;
-	}
-
 	@Column(name = "timeStamp", nullable = true, length = 100)
 	public String getTimeStamp() {
 		return timeStamp;
@@ -190,7 +180,7 @@ public class FileMetadata implements java.io.Serializable {
 		return "FileMetadata [id=" + id + ", source=" + source + ", name=" + name + ", location=" + location
 				+ permissions + ", owner=" + owner + ", group=" + group + ", numOfRecords=" + numOfRecords
 				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", loadStatus=" + loadStatus
-				+ ", errorMessage=" + errorMessage + ", recordCreatedBy=" + recordCreatedBy + ", timeStamp=" + timeStamp
+				+ ", errorMessage=" + errorMessage + ", timeStamp=" + timeStamp
 				+ "]";
 	}
 

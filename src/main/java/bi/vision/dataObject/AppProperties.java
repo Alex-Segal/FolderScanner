@@ -1,12 +1,12 @@
 package bi.vision.dataObject;
 
-public class Properties {
+public class AppProperties {
 	
-	private String sourceDir;
-	private String targetDir;
-	private String compressionSupported;
+	public static String sourceDir;
+	public static String targetDir;
+	public static String compressionSupported;
 	
-	public String getSourceDir() {
+/*	public String getSourceDir() {
 		return sourceDir;
 	}
 	public void setSourceDir(String sourceDir) {
@@ -23,5 +23,5 @@ public class Properties {
 	}
 	public void setCompressionSupported(String compressionSupported) {
 		this.compressionSupported = compressionSupported;
-	}
+	}*/
 }

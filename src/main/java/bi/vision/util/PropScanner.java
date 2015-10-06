@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import bi.vision.dataObject.Properties;
+import bi.vision.dataObject.AppProperties;
 
 public class PropScanner {
 	
-	public Properties getTransferProperties(String path){
-		Properties prop = new Properties();
+	public void LoadProperties(String path){
+//		LoadProperties  prop = new LoadProperties();
 		HashMap confMap = new HashMap();
 		if (path.equals("")){
 			path = "config.properties";
@@ -28,9 +28,9 @@ public class PropScanner {
                 confMap.put(propLine[0], propLine[1]);
             }
             bufferedReader.close();
-            prop.setSourceDir((String) confMap.get("sourceDir"));
-            prop.setTargetDir((String) confMap.get("targetDir"));
-            prop.setCompressionSupported((String) confMap.get("compressionSupported"));
+            AppProperties.sourceDir = ((String) confMap.get("sourceDir"));
+            AppProperties.targetDir = ((String) confMap.get("targetDir"));
+            AppProperties.compressionSupported = ((String) confMap.get("compressionSupported"));
         }
         catch(FileNotFoundException ex) {
             System.out.println("Unable to open file '" + path + "'");                
@@ -38,7 +38,6 @@ public class PropScanner {
         catch(IOException ex) {
             System.out.println("Error reading file '" + path + "'");                  
         }
-        return prop;
 	}
 
 }

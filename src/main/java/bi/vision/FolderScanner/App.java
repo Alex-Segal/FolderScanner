@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import bi.vision.dataObject.FileMetadata;
-import bi.vision.dataObject.Properties;
+import bi.vision.dataObject.AppProperties;
 import bi.vision.db.HibernateUtil;
 import bi.vision.util.FolderScanner;
 import bi.vision.util.PropScanner;
@@ -20,9 +20,15 @@ public class App
         FolderScanner fs = new FolderScanner();
         PropScanner ps = new PropScanner();
         ArrayList<FileMetadata> fileMetaList = new ArrayList<FileMetadata>();        
-        Properties prop = ps.getTransferProperties("");
+//        AppProperties prop = ps.getTransferProperties("");
+        String configPath = "";
+        if (args.length > 0){
+        	configPath = args[0];
+        }
+        ps.LoadProperties(configPath);
         
-        fileMetaList = fs.scanFolder(prop.getSourceDir());
+        
+        fileMetaList = fs.scanFolder(AppProperties.sourceDir);
         
         session.beginTransaction();
         for (FileMetadata fm : fileMetaList){

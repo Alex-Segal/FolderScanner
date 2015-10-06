@@ -20,7 +20,12 @@ public class FolderScanner {
 		CollectMetadata meta = new CollectMetadata();
 	
 		for (int i = 0; i < listOfFiles.length; i++) {
-			fileMetaList.add(meta.getMetadata(listOfFiles[i]));
+			try {
+				fileMetaList.add(meta.getMetadata(listOfFiles[i]));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return fileMetaList;
 	}
