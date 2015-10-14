@@ -20,7 +20,7 @@ import bi.vision.dataObject.FileMetadata;
 
 public class CollectMetadata {
 
-	public FileMetadata getMetadata(File file) throws IOException {
+	public FileMetadata getMetadata(File file) throws IOException {  // wrap in a custom exception 
 		FileMetadata fileMeta = new FileMetadata();
 
 		if (file.isFile()) {
