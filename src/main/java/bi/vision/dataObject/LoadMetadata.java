@@ -1,10 +1,14 @@
 package bi.vision.dataObject;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "LoadMetadata") // Table name in SQL Server is FileMetadata
 public class LoadMetadata {
 	
 	private int id;

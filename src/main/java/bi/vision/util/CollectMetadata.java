@@ -28,15 +28,12 @@ public class CollectMetadata {
 			BasicFileAttributes attributes;
 			attributes = Files.readAttributes(path, BasicFileAttributes.class);
 
-
 			fileMeta.setSource(AppProperties.sourceDir);
 			fileMeta.setName(file.getName());
 			fileMeta.setLocation(file.getPath());
 			fileMeta.setFormat(getFileFormat(fileMeta));
 			fileMeta.setSizeByte(Objects.toString(file.length()));
-			fileMeta.setPermissions("temp 777");
 			fileMeta.setOwner(getOwner(path)); 
-			fileMeta.setGroup("temp group");
 			fileMeta.setNumOfRecords(getFileLines(file));
 			fileMeta.setCreateDate(getCreateTime(attributes));
 			fileMeta.setUpdateDate(getLastUpdate(attributes));
@@ -45,22 +42,12 @@ public class CollectMetadata {
 			fileMeta.setCompressed(checkCompression(fileMeta));
 			fileMeta.setTimeStamp(formatDate(FileTime.from(System.currentTimeMillis(), TimeUnit.MILLISECONDS)));
 
-			// ... the rest of settings
 		} else if (file.isDirectory()) {
-			System.out.println( file.getName() + " is a directory!");
+			System.out.println( file.getName() + " directory will be skipped!");
 		}
 
 		return fileMeta;
 	}
-	
-	
-
-	private FileTime FileTime(long currentTimeMillis, TimeUnit milliseconds) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 	private String getFileFormat(FileMetadata fileMeta) {
 		String format = fileMeta.getName();

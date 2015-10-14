@@ -18,9 +18,7 @@ public class FileMetadata implements java.io.Serializable {
 	private String location;
 	private String format;
 	private String sizeByte;
-	private String permissions;
 	private String owner;
-	private String group;
 	private String numOfRecords;
 	private String createDate;
 	private String updateDate;
@@ -85,15 +83,6 @@ public class FileMetadata implements java.io.Serializable {
 		this.sizeByte = sizeByte;
 	}
 
-	@Column(name = "permissions", nullable = true, length = 100)
-	public String getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(String permissions) {
-		this.permissions = permissions;
-	}
-
 	@Column(name = "owner", nullable = true, length = 100)
 	public String getOwner() {
 		return owner;
@@ -101,15 +90,6 @@ public class FileMetadata implements java.io.Serializable {
 
 	public void setOwner(String owner) {
 		this.owner = owner;
-	}
-
-	@Column(name = "perGroup", nullable = true, length = 100)
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
 	}
 
 	@Column(name = "numOfRecords", nullable = true, length = 100)
@@ -178,7 +158,7 @@ public class FileMetadata implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "FileMetadata [id=" + id + ", source=" + source + ", name=" + name + ", location=" + location
-				+ permissions + ", owner=" + owner + ", group=" + group + ", numOfRecords=" + numOfRecords
+				+ ", owner=" + owner + ", numOfRecords=" + numOfRecords
 				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", loadStatus=" + loadStatus
 				+ ", errorMessage=" + errorMessage + ", timeStamp=" + timeStamp
 				+ "]";

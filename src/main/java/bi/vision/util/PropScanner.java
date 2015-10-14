@@ -6,13 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+import Exceptions.InvalidSourceDirException;
+import Exceptions.InvalidTargetDirException;
 import bi.vision.dataObject.AppProperties;
+import bi.vision.dataObject.LoadMetadata;
 
 public class PropScanner {
 	
-	public void LoadProperties(String path){
+	public PropScanner LoadProperties(String path){
 //		LoadProperties  prop = new LoadProperties();
-		HashMap confMap = new HashMap();
+		HashMap<String, String> confMap = new HashMap<String, String>();
 		if (path.equals("")){
 			path = "config.properties";
 		}
@@ -28,9 +31,10 @@ public class PropScanner {
                 confMap.put(propLine[0], propLine[1]);
             }
             bufferedReader.close();
-            AppProperties.sourceDir = ((String) confMap.get("sourceDir"));
-            AppProperties.targetDir = ((String) confMap.get("targetDir"));
-            AppProperties.compressionSupported = ((String) confMap.get("compressionSupported"));
+//            AppProperties.sourceDir = confMap.get("sourceDir");
+            AppProperties.targetDir = confMap.get("targetDir");
+            AppProperties.compressionSupported = confMap.get("compressionSupported");
+            AppProperties.retentionPolicy = confMap.get("retentionPolicy");
         }
         catch(FileNotFoundException ex) {
             System.out.println("Unable to open file '" + path + "'");                
@@ -38,6 +42,30 @@ public class PropScanner {
         catch(IOException ex) {
             System.out.println("Error reading file '" + path + "'");                  
         }
+        
+		try{
+			if (AppProperties.sourceDir == null || AppProperties.sourceDir.length() < 1){
+				throw new InvalidSourceDirException("Invalid source directory, please check configuration file");
+			}
+			if (AppProperties.targetDir == null || AppProperties.targetDir.length() < 1){
+				throw new InvalidTargetDirException("Invalid target directory, please check configuration file");
+			}
+		}catch (InvalidSourceDirException e){
+			e.printStackTrace();
+		}catch (InvalidTargetDirException e){
+			e.printStackTrace();
+		}
+		return this;
+	}
+	
+	public LoadMetadata getConfigInstance(){
+
+		LoadMetadata lm = new LoadMetadata();
+		lm.setSourceDir(AppProperties.sourceDir);
+		lm.setTargetDir(AppProperties.targetDir);
+		lm.setCompressionSupported(AppProperties.compressionSupported);
+		lm.setRetentionPolicy(AppProperties.retentionPolicy);
+		return lm;
 	}
 
 }
