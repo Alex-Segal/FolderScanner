@@ -23,6 +23,7 @@ public class CollectMetadata {
 	private boolean compressedFlag = false;
 
 	public FileMetadata getMetadata(File file) throws IOException {  // wrap in a custom exception 
+		
 		FileMetadata fileMeta = new FileMetadata();
 		
 		if (file.isFile()) {

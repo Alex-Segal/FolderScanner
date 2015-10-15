@@ -2,6 +2,7 @@ package bi.vision.FolderScanner;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -28,6 +29,7 @@ public class App
         }else{
         	throw new FolderScannerException("Configuration file path not found! Please pass path as argument");
         }
+        
         lm = ps.LoadProperties(configPath).getConfigInstance();
         fileMetaList = fs.scanFolder(AppProperties.sourceDir);        
         session.beginTransaction();

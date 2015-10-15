@@ -12,9 +12,9 @@ import javax.persistence.Table;
 public class FileMetadata implements java.io.Serializable {
 
 	private static final long serialVersionUID = -2113581398584198581L;
-	private int id;
+	private int fileId;
 	private String source;
-	private String name;
+	private String fileName;
 	private String location;
 	private String format;
 	private String sizeByte;
@@ -29,13 +29,13 @@ public class FileMetadata implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false, precision = 100, scale = 0)
+	@Column(name = "fileId", unique = true, nullable = false, precision = 100, scale = 0)
 	public int getId() {
-		return id;
+		return fileId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.fileId = id;
 	}
 
 	@Column(name = "source", nullable = true, length = 100)
@@ -47,13 +47,14 @@ public class FileMetadata implements java.io.Serializable {
 		this.source = source;
 	}
 
-	@Column(name = "name", nullable = true, length = 100)
+	@Column(name = "name", nullable = true, length = 100,unique=true)
+	
 	public String getName() {
-		return name;
+		return fileName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.fileName = name;
 	}
 
 	@Column(name = "location", nullable = true, length = 100)
@@ -157,7 +158,7 @@ public class FileMetadata implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "FileMetadata [id=" + id + ", source=" + source + ", name=" + name + ", location=" + location
+		return "FileMetadata [id=" + fileId + ", source=" + source + ", name=" + fileName + ", location=" + location
 				+ ", owner=" + owner + ", numOfRecords=" + numOfRecords
 				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", loadStatus=" + loadStatus
 				+ ", errorMessage=" + errorMessage + ", timeStamp=" + timeStamp
