@@ -18,13 +18,13 @@ public class FileMetadata implements java.io.Serializable {
 	private String location;
 	private String format;
 	private String sizeByte;
-	private String owner;
+	private String fileOwner;
 	private String numOfRecords;
 	private String createDate;
 	private String updateDate;
 	private String loadStatus;
 	private String errorMessage;
-	private String timeStamp;
+	private String fileTimeStamp;
 	private String compressed;
 
 	@Id
@@ -47,8 +47,7 @@ public class FileMetadata implements java.io.Serializable {
 		this.source = source;
 	}
 
-	@Column(name = "name", nullable = true, length = 100,unique=true)
-	
+	@Column(name = "FileName", nullable = true, length = 100, unique=true)
 	public String getName() {
 		return fileName;
 	}
@@ -84,13 +83,13 @@ public class FileMetadata implements java.io.Serializable {
 		this.sizeByte = sizeByte;
 	}
 
-	@Column(name = "owner", nullable = true, length = 100)
+	@Column(name = "fileOwner", nullable = true, length = 100)
 	public String getOwner() {
-		return owner;
+		return fileOwner;
 	}
 
 	public void setOwner(String owner) {
-		this.owner = owner;
+		this.fileOwner = owner;
 	}
 
 	@Column(name = "numOfRecords", nullable = true, length = 100)
@@ -138,20 +137,20 @@ public class FileMetadata implements java.io.Serializable {
 		this.errorMessage = errorMessage;
 	}
 
-	@Column(name = "timeStamp", nullable = true, length = 100)
+	@Column(name = "fileTimeStamp", nullable = true, length = 100)
 	public String getTimeStamp() {
-		return timeStamp;
+		return fileTimeStamp;
 	}
 
 	public void setTimeStamp(String timeStamp) {
-		this.timeStamp = timeStamp;
+		this.fileTimeStamp = timeStamp;
 	}
 	
+	@Column(name = "compressed", nullable = true, length = 100)
 	public String getCompressed() {
 		return compressed;
 	}
 	
-	@Column(name = "timeStamp", nullable = true, length = 100)
 	public void setCompressed(String compressed) {
 		this.compressed = compressed;
 	}
@@ -159,9 +158,9 @@ public class FileMetadata implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "FileMetadata [id=" + fileId + ", source=" + source + ", name=" + fileName + ", location=" + location
-				+ ", owner=" + owner + ", numOfRecords=" + numOfRecords
+				+ ", owner=" + fileOwner + ", numOfRecords=" + numOfRecords
 				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", loadStatus=" + loadStatus
-				+ ", errorMessage=" + errorMessage + ", timeStamp=" + timeStamp
+				+ ", errorMessage=" + errorMessage + ", timeStamp=" + fileTimeStamp
 				+ "]";
 	}
 
