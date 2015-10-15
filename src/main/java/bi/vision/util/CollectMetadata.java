@@ -19,17 +19,21 @@ import bi.vision.dataObject.AppProperties;
 import bi.vision.dataObject.FileMetadata;
 
 public class CollectMetadata {
+	
+	private boolean compressedFlag = false;
 
 	public FileMetadata getMetadata(File file) throws IOException {  // wrap in a custom exception 
 		FileMetadata fileMeta = new FileMetadata();
-
+		
 		if (file.isFile()) {
 			Path path = Paths.get(file.getPath());
 			BasicFileAttributes attributes;
 			attributes = Files.readAttributes(path, BasicFileAttributes.class);
 
+			
 			fileMeta.setSource(AppProperties.sourceDir);
 			fileMeta.setName(file.getName());
+			fileMeta.setCompressed(checkCompression(fileMeta));
 			fileMeta.setLocation(file.getPath());
 			fileMeta.setFormat(getFileFormat(fileMeta));
 			fileMeta.setSizeByte(Objects.toString(file.length()));
@@ -39,7 +43,6 @@ public class CollectMetadata {
 			fileMeta.setUpdateDate(getLastUpdate(attributes));
 			fileMeta.setLoadStatus(null); // will be updated after load
 			fileMeta.setErrorMessage(null); // will be updated after load if needed
-			fileMeta.setCompressed(checkCompression(fileMeta));
 			fileMeta.setTimeStamp(formatDate(FileTime.from(System.currentTimeMillis(), TimeUnit.MILLISECONDS)));
 
 		} else if (file.isDirectory()) {
@@ -57,6 +60,10 @@ public class CollectMetadata {
 	}
 
 	private String getFileLines(File file) {
+		// If file is compressed, do not count number of rows.
+		if (compressedFlag == true)
+			return null;
+		
 		int count = 0;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
@@ -111,6 +118,7 @@ public class CollectMetadata {
 		if (AppProperties.compressionSupported.contains(ext)){
 			commpression = ext;
 		}
+		this.compressedFlag = commpression == null ? false : true;
 		return commpression;
 	}
 	
